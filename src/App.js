@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import S3FileUpload from 'react-s3';
+import ReactS3 from 'react-s3';
+ 
+const config = {
+  bucketName: 'imageupload23',
+
+  region: 'us-east-1',
+  accessKeyId: 'AKIAIS7CFAA7EYZF5FIA',
+  secretAccessKey: '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',
+}
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+  upload(e){
+    console.log(e.target.files[0]);
+    ReactS3
+  .uploadFile(e.target.files[0], config)
+  .then(data => console.log(data))
+  .catch(err => console.error(err))
   }
+  
+render () {
+
+  return (
+      <div> 
+        <h3>
+          upload Image
+        </h3>
+        <input type= "file"
+          onChange = {this.upload}/>
+        
+      </div>
+  );
+
+}
 }
 
 export default App;
