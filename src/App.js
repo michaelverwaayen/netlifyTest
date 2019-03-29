@@ -30,7 +30,7 @@ render () {
         </h3>
         <input type= "file"
           onChange = {this.upload}/>
-        
+        confirmed working
       </div>
   );
 
